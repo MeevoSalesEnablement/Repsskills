@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rep Skills · Meevo Sales Enablement</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Meevo brand palette — light theme */
+  --bg:#F8F7F5;--bg-2:#efece7;--card:#ffffff;--card-2:#f5f2ee;--border:#e5e1d9;
+  --ink:#232426;--ink-2:#55565a;--muted:#8a8b8f;
+  --teal:#204855;--teal-lt:#216479;--plum:#4B3951;
+  --green:#204855;--amber:#9A997B;--red:#A75F37;--shadow:0 8px 24px rgba(35,36,38,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 32px 80px}
+.mast{display:flex;align-items:center;gap:16px;margin-bottom:6px}
+.mast .logo{width:44px;height:44px;border-radius:11px;background:linear-gradient(135deg,var(--teal),var(--plum));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:#fff}
+.mast h1{font-size:23px;font-weight:800;letter-spacing:-.02em}
+.mast .sub{font-size:13px;color:var(--muted);margin-top:1px}
+.controls{display:flex;gap:12px;align-items:center;margin:20px 0 4px}
+.btn{padding:11px 16px;border-radius:11px;border:1px solid var(--border);background:var(--card);color:var(--ink);font-family:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.btn:hover{background:var(--card-2)}
+.note{font-size:12px;color:var(--muted);margin:2px 0 24px}
+.back{background:none;border:none;color:var(--ink-2);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;gap:7px;padding:6px 0;margin-bottom:16px}
+.back:hover{color:var(--ink)}
+.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);margin:6px 0 14px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+#mgrGrid{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:820px){#mgrGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;cursor:pointer;transition:transform .12s,border-color .12s,box-shadow .12s}
+.card:hover{transform:translateY(-2px);border-color:var(--teal);box-shadow:var(--shadow)}
+.card .row{display:flex;align-items:center;gap:14px}
+.avatar{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:#fff;flex-shrink:0}
+.card .nm{font-size:15px;font-weight:700}
+.card .ttl{font-size:11.5px;color:var(--muted);margin-top:1px}
+.card .foot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:13px;border-top:1px solid var(--border)}
+.card .foot .lbl{font-size:11px;color:var(--muted)}
+.pill{font-size:20px;font-weight:800}.pill .max{font-size:11px;color:var(--muted);font-weight:600}
+.count-chip{font-size:11px;color:var(--ink-2);background:var(--bg-2);border:1px solid var(--border);padding:3px 9px;border-radius:20px}
+.detail{display:none}
+.rep-head{display:flex;align-items:center;gap:18px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;margin-bottom:20px;flex-wrap:wrap}
+.rep-head .avatar{width:60px;height:60px;font-size:20px}
+.rep-head .hinfo{flex:1;min-width:170px}
+.rep-head .hinfo h2{font-size:22px;font-weight:800}
+.rep-head .hinfo .meta{font-size:12.5px;color:var(--muted);margin-top:3px}
+.rep-head .ov{text-align:center}
+.rep-head .ov .big{font-size:40px;font-weight:800;line-height:1}
+.rep-head .ov .lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.steps{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.steps table{width:100%;border-collapse:collapse}
+.steps th{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);text-align:center;padding:12px 10px;border-bottom:1px solid var(--border);background:var(--bg-2)}
+.steps th.step{text-align:left;padding-left:18px}
+.steps td{padding:13px 10px;text-align:center;border-bottom:1px solid var(--border);font-size:13.5px}
+.steps td.step{text-align:left;padding-left:18px;font-weight:600;cursor:pointer}
+.steps td.step:hover{color:var(--teal-lt)}
+.steps td.step .sub{display:block;font-size:11px;font-weight:500;color:var(--muted);margin-top:2px}
+.steps tr:last-child td{border-bottom:none}
+.steps .chev{font-size:11px;color:var(--muted);margin-left:6px}
+.sc{font-weight:700}
+.mgr-in{width:56px;padding:7px;text-align:center;background:var(--bg-2);border:1px solid var(--border);border-radius:8px;color:var(--ink);font-family:inherit;font-size:13px}
+.mgr-in:focus{outline:none;border-color:var(--teal)}
+.mgr-in.saving{border-color:var(--amber)}.mgr-in.saved{border-color:var(--green)}
+.avg{font-weight:800;font-size:15px}
+.overlay{display:none;position:fixed;inset:0;background:rgba(8,11,15,.72);backdrop-filter:blur(3px);z-index:50;align-items:center;justify-content:center;padding:24px}
+.overlay.show{display:flex}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:18px;max-width:560px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow)}
+.modal-head{padding:22px 24px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.modal-head .st{font-size:18px;font-weight:800}.modal-head .st .sub{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:3px}
+.modal-head .mscore{text-align:right;flex-shrink:0}.modal-head .mscore .n{font-size:30px;font-weight:800;line-height:1}.modal-head .mscore .d{font-size:11px;color:var(--muted);font-weight:600}
+.close{background:none;border:none;color:var(--muted);font-size:24px;cursor:pointer;line-height:1;padding:0 0 0 6px}.close:hover{color:var(--ink)}
+.modal-body{padding:20px 24px 26px}
+.mb-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:12px}
+.notes{list-style:none;display:flex;flex-direction:column;gap:11px}
+.notes li{display:flex;gap:12px;background:var(--bg-2);border:1px solid var(--border);border-radius:11px;padding:13px 15px;font-size:13.5px;line-height:1.55}
+.notes li .num{width:22px;height:22px;border-radius:50%;background:var(--teal);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.empty{text-align:center;color:var(--muted);padding:50px 20px}
+#leaderboard{margin-top:26px}
+.lb-rep{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin-bottom:12px}
+.lb-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.lb-name{font-weight:700;font-size:15px}
+.lb-overall{font-weight:800;font-size:16px}
+.lb-row{display:grid;grid-template-columns:170px 1fr 34px;align-items:center;gap:12px;margin:7px 0}
+.lb-label{font-size:12px;color:var(--ink-2)}
+.lb-track{height:10px;background:var(--bg-2);border-radius:5px;overflow:hidden}
+.lb-fill{height:100%;border-radius:5px;transition:width .3s}
+.lb-val{font-size:12px;font-weight:700;text-align:right}
+@media(max-width:640px){.lb-row{grid-template-columns:120px 1fr 30px}}
+@media(max-width:640px){.wrap{padding:20px 16px 60px}.steps{overflow-x:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="mast">
+    <div class="logo">M</div>
+    <div><h1>Rep Skills</h1>
+      <div class="sub">Sales-process skill by rep · your score + manager score = live average out of 5</div></div>
+  </div>
+
+  <div class="controls"><button class="btn" id="refreshBtn">&#8635; Refresh</button></div>
+  <div class="note" id="note">Loading…</div>
+
+  <div id="home">
+    <div class="section-label">Sales managers</div>
+    <div class="grid" id="mgrGrid"></div>
+  </div>
+
+  <div id="mgrView" class="detail">
+    <button class="back" data-home>&#8592; All managers</button>
+    <div class="section-label" id="mgrLabel"></div>
+    <div class="grid" id="repGrid"></div>
+    <div id="leaderboard"></div>
+  </div>
+
+  <div id="repView" class="detail">
+    <button class="back" id="repBack">&#8592; Back</button>
+    <div class="rep-head">
+      <div class="avatar" id="rAvatar"></div>
+      <div class="hinfo"><h2 id="rName"></h2><div class="meta" id="rMeta"></div></div>
+      <div class="ov"><div class="big" id="rOverall"></div><div class="lbl">Overall / 5</div></div>
+    </div>
+    <div class="section-label">Sales process · tap a step for coaching · manager enters their score</div>
+    <div class="steps">
+      <table>
+        <thead><tr>
+          <th class="step">Step</th><th>Data Driven Score</th><th>Manager Score</th><th>Average</th>
+        </tr></thead>
+        <tbody id="stepBody"></tbody>
+      </table>
+    </div>
+    <div class="note" style="margin-top:10px">Manager scores save to the sheet as typed. Average = mean of your score and the manager's.</div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="st" id="mStep"></div>
+      <div style="display:flex;align-items:flex-start;gap:8px">
+        <div class="mscore"><div class="n" id="mAvg"></div><div class="d">avg / 5</div></div>
+        <button class="close" id="closeBtn">&times;</button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="mb-label">Coaching points</div>
+      <ul class="notes" id="mNotes"></ul>
+    </div>
+  </div>
+</div>
+
+<script>
+var API_URL = 'https://script.google.com/macros/s/AKfycbydhj0ci0C1NPb9Y0WpOu2kRvc2b7E8efGjLU3yvvhKpzis8ADaVEAry8zpz9hseui9/exec';
+
+var MANAGERS = [
+  { key:'meeker',  name:'Taylor Meeker', title:'Sales Manager · Core',               match:'meeker' },
+  { key:'baccala', name:'Avery Baccala', title:'SDR Manager · Core',                 match:'baccala' },
+  { key:'hull',    name:'Mel Hull',      title:'Sales Manager · Med Spa (AE & SDR)', match:'hull' },
+  { key:'wiser',   name:'Dan Wiser',     title:'VP of Sales · Enterprise',            match:'wiser' },
+];
+
+var STEPS = {
+  AE: [
+    { key:'opening',        label:'Opening (PPO)',            sub:'Purpose, plan & outcome up front' },
+    { key:'discovery',      label:'Discovery Questioning',    sub:'Uncover situation, priorities & pain' },
+    { key:'businessImpact', label:'Business Impact to Value', sub:'Tie impact to the value prop' },
+    { key:'fab',            label:'Feature-Advantage-Benefit',sub:'FAB to a quantifiable outcome' },
+    { key:'objection',      label:'Objection Handling',       sub:'Acknowledge, reframe, re-engage' },
+    { key:'execSummary',    label:'Executive Summary',        sub:'Recap, confirm, transition' },
+    { key:'pricing',        label:'Investment Discussion',    sub:'Anchor on value, defend, trade' },
+    { key:'closing',        label:'Closing & Commitment',     sub:'Minor (next step) & major (the deal)' },
+  ],
+  SDR: [
+    { key:'opening',   label:'Opening & Rapport',    sub:'Confident, relevant, earns the time' },
+    { key:'discovery', label:'Discovery & Qualifying',sub:'Targeted questions that surface fit' },
+    { key:'valueprop', label:'Value Proposition',    sub:'Crisp, differentiated, role-relevant' },
+    { key:'objection', label:'Objection Handling',   sub:'Acknowledge, reframe, keep moving' },
+    { key:'closing',   label:'Booking the Meeting',  sub:'Secure a concrete next step' },
+  ],
+  ENT: [
+    { key:'opening',        label:'Opening (PPO)',            sub:'Purpose, plan & outcome up front' },
+    { key:'discovery',      label:'Discovery Questioning',    sub:'Uncover situation, priorities & business impact' },
+    { key:'businessImpact', label:'Business Impact to Value', sub:'Connect business impact to strategic value' },
+    { key:'fab',            label:'Feature-Advantage-Benefit',sub:'Capabilities to quantifiable outcomes' },
+    { key:'objection',      label:'Objection Handling',       sub:'Acknowledge, reframe, re-engage' },
+    { key:'pricing',        label:'Investment Discussion',    sub:'Anchor on value, defend, trade' },
+    { key:'closing',        label:'Closing & Commitment',     sub:'Secure executive commitment, advance the deal' },
+  ],
+};
+
+// Coaching points by role → step → band (low/mid/high). Up to 3 each.
+function band(v){ return v==null?'mid':(v<2.5?'low':(v<=3.5?'mid':'high')); }
+var COACHING = {
+ AE:{
+  opening:{low:['Start with a clear agenda and confirm the time available.','Explain the purpose of the meeting as a conversation to understand their business, not to deliver a product pitch.','Gain agreement on the agenda before moving into discovery.'],
+    mid:['Tailor the agenda to the customer\'s stated priorities or reason for meeting.','Clearly define the desired outcome and explain what success looks like for both parties.','Invite the customer to add or adjust the agenda to ensure the conversation is relevant.'],
+    high:['Personalize the opening using pre-call research, previous conversations, or business context.','Frame the meeting around mutual value by aligning on business priorities and expected outcomes.','Establish a collaborative partnership by confirming priorities, encouraging customer input, and gaining commitment before transitioning into discovery.']},
+  discovery:{low:['Slow down and understand the customer\'s current process before discussing solutions.','Ask open-ended questions to uncover goals, challenges, and priorities.','Avoid jumping into a pitch until you have identified at least one meaningful business challenge.'],
+    mid:['Use layered follow-up questions to move beyond symptoms and identify root causes (SPIN: Problem).','Explore the implications of current challenges to understand business impact, risk, or missed opportunities (SPIN: Implication).','Validate your understanding by summarizing key priorities before transitioning to the solution.'],
+    high:['Guide the customer through Situation, Problem, Implication, and Need-Payoff questions to uncover compelling business drivers.','Help the customer quantify the impact of their challenges and define the cost of maintaining the status quo.','Enable the customer to articulate the value and desired outcomes of making a change before positioning your solution.']},
+  businessImpact:{low:['Lead with the business outcome the customer is trying to achieve before discussing product capabilities.','Relate solution benefits to the customer\'s stated challenges or goals.','Avoid feature dumping; ensure every capability is tied to a customer need.'],
+    mid:['Connect solution capabilities to the customer\'s stated priorities and desired outcomes.','Quantify the potential impact using relevant business metrics such as revenue, productivity, cost savings, risk reduction, or time.','Validate that the proposed value aligns with the customer\'s success criteria before moving forward.'],
+    high:['Tailor the value proposition to the customer\'s strategic initiatives, business priorities, and stakeholder goals.','Quantify the business impact and connect it to the cost of inaction, ROI, or expected business outcomes.','Gain customer agreement on the value before recommending next steps, positioning the solution as the best path to their desired outcomes.']},
+  fab:{low:['Present features using the full Feature to Advantage to Benefit structure.','Explain how each feature helps the customer rather than simply describing functionality.','Limit product-heavy conversations by focusing only on capabilities relevant to the discussion.'],
+    mid:['Tailor Feature-Advantage-Benefit messaging to the customer\'s stated challenges and priorities.','Translate product capabilities into measurable business benefits, such as time savings, productivity, cost reduction, or revenue impact.','Check for customer understanding and relevance before introducing additional capabilities.'],
+    high:['Position capabilities in the context of the customer\'s business objectives and desired outcomes rather than product functionality.','Quantify the expected impact by linking benefits to business metrics, ROI, efficiency gains, or risk reduction whenever possible.','Prioritize the few capabilities that deliver the greatest business value, creating a compelling, customer-specific value story instead of a feature presentation.']},
+  objection:{low:['Pause and clarify the customer\'s concern before responding or defending.','Use the Feel-Felt-Found framework to acknowledge the customer\'s perspective and build rapport.','Avoid overcoming objections too quickly; ensure the customer feels heard first.'],
+    mid:['Ask follow-up questions to uncover the root cause behind the stated objection.','Use Feel-Felt-Found with relevant customer examples to normalize the concern and introduce a new perspective.','Re-engage the customer with a question that refocuses the conversation on their business priorities or desired outcomes.'],
+    high:['Differentiate between surface objections and underlying business concerns by exploring impact, urgency, and stakeholder perspectives.','Apply Feel-Felt-Found naturally, demonstrating empathy while reinforcing value through relevant customer outcomes or success stories.','Gain agreement on the resolved concern and transition with a forward-looking question that advances the buying conversation and next step.']},
+  execSummary:{low:['Recap the customer\'s stated priorities, challenges, and desired outcomes.','Connect the proposed solution to the needs uncovered during discovery.','Confirm you have accurately captured their priorities before transitioning to the next topic.'],
+    mid:['Summarize the customer\'s business priorities and the agreed-upon challenges.','Tie each recommended capability back to the specific outcomes or value discussed.','Ask for confirmation that the proposed approach addresses their priorities before discussing pricing or next steps.'],
+    high:['Deliver a concise, business-focused recap that reinforces the customer\'s strategic priorities, success criteria, and desired business outcomes.','Connect the value proposition to measurable business impact, ensuring each recommendation supports an agreed-upon priority.','Gain explicit customer agreement on the value delivered and use that alignment to transition confidently into pricing, next steps, or a mutual action plan.']},
+  pricing:{low:['Reinforce the business value and agreed-upon outcomes before discussing investment.','Present pricing confidently, clearly, and without unnecessary justification or apology.','Pause after sharing the investment and allow the customer to respond before negotiating.'],
+    mid:['Anchor the investment to the customer\'s priorities, expected outcomes, and business impact.','Address pricing concerns by revisiting value rather than leading with discounts.','If concessions are appropriate, negotiate a mutual exchange by trading for commitment, scope, terms, or timing.'],
+    high:['Position the investment within the context of ROI, business outcomes, and the cost of inaction.','Defend the value proposition with confidence by connecting investment to measurable customer results.','Negotiate strategically so every concession creates reciprocal value, preserving deal integrity while advancing toward a mutually beneficial agreement.']},
+  closing:{low:['Always ask for a specific next step before ending the meeting.','Confirm the date, time, and participants for the follow-up meeting while still on the call.','Summarize agreed-upon actions and responsibilities for both parties.'],
+    mid:['Listen for buying signals and confidently ask for the appropriate commitment or next step.','Confirm stakeholder involvement, timelines, and any remaining decision criteria.','End the conversation with a mutual action plan that clearly outlines who will do what and by when.'],
+    high:['Recognize verbal and behavioral buying signals to confidently ask for the business or the appropriate advancement in the sales process.','Gain explicit customer commitment by confirming decision process, timeline, stakeholders, and success criteria.','Conclude with a mutually agreed action plan that reinforces accountability, eliminates ambiguity, and keeps the opportunity moving forward.']},
+ },
+ SDR:{
+  opening:{low:['Open with confidence by introducing yourself, your company, and the reason for your call.','Personalize the opening with a relevant insight about the prospect or their organization.','Ask permission to continue by transitioning quickly into a question rather than a pitch.'],
+    mid:['Tailor the opening using research, a recent event, or a business challenge relevant to the prospect.','Match the prospect\'s tone, pace, and communication style to build rapport naturally.','Lead with an open-ended question that encourages the prospect to share their perspective.'],
+    high:['Personalize the conversation with a business insight or trigger that demonstrates preparation and relevance.','Build credibility quickly while adapting naturally to the prospect\'s communication style and engagement level.','Use a thought-provoking question that encourages dialogue and positions the SDR as a trusted advisor rather than a cold caller.']},
+  discovery:{low:['Ask open-ended questions to understand the prospect\'s current situation and business challenges.','Use follow-up questions to clarify the reason behind the prospect\'s initial response.','Gather basic qualification criteria such as company, role, current solution, and timing before recommending a meeting.'],
+    mid:['Probe beyond surface-level answers to identify business priorities, pain points, and desired outcomes.','Qualify the opportunity by confirming fit, including company profile, technology environment, priorities, and timing.','Connect what you have learned to a relevant business reason for continuing the conversation with an Account Executive.'],
+    high:['Lead a focused discovery conversation that uncovers business drivers, urgency, and qualification criteria.','Validate the opportunity by confirming organizational fit, stakeholder alignment, and readiness to explore solutions.','Summarize the prospect\'s priorities and position the meeting as the logical next step to address their specific business needs.']},
+  valueprop:{low:['Clearly explain what your solution does in one or two concise sentences.','Tailor the value proposition to the prospect\'s role or business function.','Lead with the business outcome before describing the solution.'],
+    mid:['Personalize the message by connecting it to the prospect\'s priorities or common business challenges.','Highlight what differentiates your solution without overwhelming the prospect with features.','Deliver a concise value statement that naturally leads into a discovery question.'],
+    high:['Deliver a compelling, role-specific value proposition focused on measurable business outcomes.','Differentiate your solution by addressing a relevant challenge or opportunity unique to the prospect\'s business.','Use the value proposition to create curiosity and transition seamlessly into a meaningful business conversation.']},
+  objection:{low:['Pause and clarify the real concern before responding to a brush-off or objection.','Use the Feel-Felt-Found framework to acknowledge the prospect\'s perspective and build rapport.','Avoid ending the conversation at the first objection; respond confidently and continue the dialogue.'],
+    mid:['Ask a follow-up question to uncover the reason behind the initial objection or brush-off.','Use Feel-Felt-Found with relevant customer examples to normalize the concern and introduce a different perspective.','Transition back into discovery with a question that keeps the conversation moving toward business priorities.'],
+    high:['Differentiate between reflexive brush-offs and genuine concerns by asking thoughtful follow-up questions.','Apply Feel-Felt-Found conversationally to acknowledge the prospect, share relevant proof, and reinforce business value.','Confidently navigate common objections by re-engaging the prospect with a question that earns commitment for the next step.']},
+  closing:{low:['Clearly ask for the meeting rather than waiting for the prospect to suggest the next step.','Reinforce the value of meeting with the Account Executive before proposing a date and time.','Confirm the meeting details before ending the conversation.'],
+    mid:['Position the meeting around the business outcomes the prospect wants to achieve.','Secure a specific date and time while confirming the purpose and expected value of the meeting.','Set clear expectations by confirming attendees, agenda, and next steps to improve meeting attendance.'],
+    high:['Summarize the prospect\'s priorities and clearly articulate why meeting with the Account Executive is the logical next step.','Gain explicit commitment by confirming the meeting, participants, agenda, and desired outcomes.','Leave the prospect with a clear understanding of the value they will receive, increasing commitment and reducing the likelihood of cancellations or no-shows.']},
+ },
+ ENT:{
+  opening:{low:['Clearly communicate the purpose, agenda, timing, and desired outcome at the start of every meeting.','Set expectations by explaining the meeting structure (e.g., discovery, strategy discussion, business review).','Confirm the customer is aligned before moving into the conversation.'],
+    mid:['Tailor the agenda based on the customer\'s business priorities, previous conversations, or account research.','Position the meeting around mutual discovery and business outcomes rather than products or solutions.','Gain agreement on the desired outcome and invite the customer to adjust the agenda based on their priorities.'],
+    high:['Open with business context that reflects preparation, account knowledge, and an understanding of the customer\'s strategic initiatives.','Frame the conversation as a collaborative business discussion with clearly defined objectives and success criteria.','Secure executive alignment on priorities, desired outcomes, and decision-making expectations before transitioning into discovery.']},
+  discovery:{low:['Use open-ended questions to understand the customer\'s current environment, initiatives, and business challenges.','Probe beyond the first response to identify the customer\'s highest priorities and desired outcomes.','Avoid positioning solutions until you have confirmed the customer\'s key business needs.'],
+    mid:['Validate the customer\'s top business priorities and explore the business drivers behind each one.','Use layered follow-up questions (SPIN: Problem & Implication) to uncover root causes, stakeholders, and organizational impact.','Quantify the business consequences by exploring operational, financial, or strategic risks of maintaining the status quo.'],
+    high:['Guide stakeholders through strategic discovery that uncovers business objectives, executive priorities, success metrics, and decision criteria.','Explore the broader organizational impact, including cross-functional dependencies, risks, and the cost of inaction.','Help the customer quantify the business case for change, creating urgency and alignment before introducing solutions.']},
+  businessImpact:{low:['Connect each solution capability to a business challenge identified during discovery.','Use the customer\'s stated priorities to explain how the solution addresses their needs.','Focus on business outcomes rather than product features when presenting value.'],
+    mid:['Explicitly connect every recommendation to a customer-identified priority or initiative using their language.','Quantify the expected business impact whenever possible, including efficiency, cost savings, revenue growth, risk reduction, or productivity improvements.','Reinforce value by summarizing how each capability supports the customer\'s desired business outcomes before moving on.'],
+    high:['Tailor the value proposition to the customer\'s strategic objectives, executive priorities, and organizational success metrics.','Translate solution capabilities into measurable business outcomes and articulate the ROI and cost of inaction across stakeholders.','Consistently close each discussion by reinforcing the business outcome achieved, keeping the conversation focused on value rather than product functionality.']},
+  fab:{low:['Present capabilities using the full Feature to Advantage to Benefit framework.','Explain how each capability addresses a specific customer challenge rather than simply describing functionality.','Pace the conversation so each capability is clearly connected to its business benefit.'],
+    mid:['Connect each capability to the customer\'s stated goals, initiatives, or business challenges.','Translate product capabilities into measurable business outcomes such as efficiency gains, cost reduction, productivity improvements, revenue growth, or risk mitigation.','Confirm the benefit is relevant before moving to the next capability, avoiding feature-heavy presentations.'],
+    high:['Position capabilities within the context of the customer\'s strategic objectives and desired business outcomes rather than product functionality.','Quantify the expected business impact by linking benefits to executive priorities, ROI, operational improvements, or the cost of inaction.','Deliver a concise, customer-specific value narrative where every capability reinforces the business case and advances the buying decision.']},
+  objection:{low:['Pause and clarify the customer\'s concern before responding.','Use the Feel-Felt-Found framework to acknowledge the customer\'s perspective and demonstrate understanding.','Avoid overcoming objections too quickly; ensure the customer feels heard before moving forward.'],
+    mid:['Ask follow-up questions to uncover the root cause behind the stated objection.','Apply Feel-Felt-Found using relevant customer experiences or success stories to normalize the concern and introduce a new perspective.','Confirm the concern has been addressed before transitioning back to the customer\'s business priorities and desired outcomes.'],
+    high:['Differentiate between surface objections and underlying business, stakeholder, or organizational concerns.','Use Feel-Felt-Found naturally, combining empathy with credible proof points and measurable customer outcomes that reinforce the business case.','Re-engage with a strategic question that advances executive alignment, validates the resolution, and moves the opportunity toward the next decision.']},
+  pricing:{low:['Reinforce the agreed business value and desired outcomes before discussing investment.','Present pricing confidently and transparently without immediately justifying or discounting.','Pause to understand the customer\'s reaction before responding to pricing concerns.'],
+    mid:['Connect the investment directly to the business outcomes, priorities, and value the customer identified during discovery.','Address pricing concerns by reinforcing ROI, business impact, and the cost of inaction before discussing concessions.','If a concession is appropriate, trade for a mutual commitment such as timeline, scope, contract terms, stakeholder alignment, or next steps.'],
+    high:['Position the investment as part of the customer\'s business case, aligning it to executive priorities, measurable outcomes, and long-term value.','Defend the investment with quantified business impact, customer proof points, and expected ROI rather than reducing price.','Negotiate strategically by ensuring every concession creates reciprocal value, protecting deal integrity while advancing executive commitment.']},
+  closing:{low:['Clearly ask for the appropriate next step before ending the conversation.','Confirm the follow-up meeting, attendees, and timing while still on the call.','Summarize agreed actions and responsibilities for both parties.'],
+    mid:['Recognize buying signals and confidently ask for the appropriate commitment based on the stage of the opportunity.','Confirm decision process, key stakeholders, timelines, and any remaining success criteria.','Establish a mutual action plan that outlines next steps, owners, and target dates to keep the opportunity progressing.'],
+    high:['Secure commitment by aligning next steps to the customer\'s business objectives, decision process, and implementation timeline.','Gain explicit agreement from stakeholders on responsibilities, milestones, and the path to a decision.','Conclude with a documented mutual action plan that reinforces accountability, builds consensus, and creates momentum toward a successful business outcome.']},
+ },
+};
+
+var DATA = { roster:[], scores:[] };
+
+// helpers
+function initials(n){ return (n||'?').split(' ').map(function(p){return p[0]}).join('').slice(0,2).toUpperCase(); }
+function color(n){ var c=['#204855','#A75F37','#4B3951','#9A997B','#BF9982','#216479'];var s=0;for(var i=0;i<(n||'').length;i++)s+=n.charCodeAt(i);return c[s%c.length]; }
+function scColor(v){ return v==null?'var(--muted)':(v<2.5?'var(--red)':(v<=3.5?'var(--amber)':'var(--green)')); }
+function fmt(v){ return v==null?'—':(Math.round(v*10)/10).toFixed(1); }
+function num(v){ return (v===''||v==null)?null:parseFloat(v); }
+function avg2(a,b){ if(a==null&&b==null)return null; if(b==null)return a; if(a==null)return b; return (a+b)/2; }
+function stepsFor(role){ return STEPS[role] || STEPS.AE; }
+function roleLabel(role){ return role==='SDR'?'SDR':(role==='ENT'?'Enterprise':'AE'); }
+function repsForMgr(m){ return DATA.roster.filter(function(r){ return String(r.Active).toUpperCase()!=='FALSE' && String(r.Manager||'').toLowerCase().indexOf(m.match)>=0; }); }
+function scoreRow(email, stepKey){ return DATA.scores.filter(function(x){ return String(x.Email).toLowerCase()===String(email).toLowerCase() && x.Step_Key===stepKey; })[0]; }
+function stepAvg(rep, stepKey){ var row=scoreRow(rep.Email, stepKey)||{}; return avg2(num(row.My_Score), num(row.Mgr_Score)); }
+function repOverall(rep){ var sum=0,n=0; stepsFor(rep.Role).forEach(function(s){ var a=stepAvg(rep,s.key); if(a!=null){sum+=a;n++;} }); return n?sum/n:null; }
+
+// load
+function loadData(){
+  var note=document.getElementById('note');
+  if(API_URL.indexOf('PASTE_')===0){ note.textContent='Set API_URL to your web app /exec URL.'; return Promise.resolve(); }
+  note.textContent='Loading…';
+  return fetch(API_URL+'?_='+Date.now()).then(function(r){return r.json();}).then(function(d){
+    if(!d.success){ note.textContent='Load error: '+(d.error||'unknown'); return; }
+    DATA.roster=d.roster||[]; DATA.scores=d.scores||[];
+    note.textContent='Updated '+new Date().toLocaleString();
+    renderHome();
+  }).catch(function(err){ note.textContent='Could not reach the web app. ('+(err.message||'error')+')'; });
+}
+
+// views
+function renderHome(){
+  document.getElementById('home').style.display='';
+  document.getElementById('mgrView').style.display='none';
+  document.getElementById('repView').style.display='none';
+  document.getElementById('mgrGrid').innerHTML = MANAGERS.map(function(m){
+    return '<div class="card" onclick="openMgr(\''+m.key+'\')">'
+      +'<div class="row"><div class="avatar" style="background:'+color(m.name)+'">'+initials(m.name)+'</div>'
+      +'<div><div class="nm">'+m.name+'</div><div class="ttl">'+m.title+'</div></div></div>'
+      +'<div class="foot"><span class="lbl">Team</span><span class="count-chip">'+repsForMgr(m).length+' reps</span></div></div>';
+  }).join('');
+  window.scrollTo(0,0);
+}
+var curMgr=null;
+function openMgr(key){
+  curMgr=MANAGERS.filter(function(m){return m.key===key;})[0];
+  document.getElementById('mgrLabel').textContent=curMgr.name+' · '+curMgr.title;
+  var reps=repsForMgr(curMgr);
+  document.getElementById('repGrid').innerHTML = reps.length ? reps.map(function(r){
+    var ov=repOverall(r);
+    return '<div class="card" onclick="openRep(\''+r.Email+'\')">'
+      +'<div class="row"><div class="avatar" style="background:'+color(r.Name)+'">'+initials(r.Name)+'</div>'
+      +'<div><div class="nm">'+r.Name+'</div><div class="ttl">'+r.Title+'</div></div></div>'
+      +'<div class="foot"><span class="lbl">Overall</span><span class="pill" style="color:'+scColor(ov)+'">'+fmt(ov)+'<span class="max">/5</span></span></div></div>';
+  }).join('') : '<div class="empty">No reps tagged to this manager. Fill the Manager column in SkillRoster.</div>';
+  renderLeaderboard(reps);
+  document.getElementById('home').style.display='none';
+  document.getElementById('mgrView').style.display='block';
+  document.getElementById('repView').style.display='none';
+  window.scrollTo(0,0);
+}
+function renderLeaderboard(reps){
+  var lb=document.getElementById('leaderboard');
+  if(!reps || !reps.length){ lb.innerHTML=''; return; }
+  var sorted=reps.slice().sort(function(a,b){ return (repOverall(b)||0)-(repOverall(a)||0); });
+  lb.innerHTML='<div class="section-label">Team leaderboard · skill by competency</div>'
+    + sorted.map(function(r){
+        var ov=repOverall(r);
+        var rows=stepsFor(r.Role).map(function(s){
+          var a=stepAvg(r,s.key), pct=(a==null?0:Math.round(a/5*100)), col=scColor(a);
+          return '<div class="lb-row"><span class="lb-label">'+s.label+'</span>'
+            +'<div class="lb-track"><div class="lb-fill" style="width:'+pct+'%;background:'+col+'"></div></div>'
+            +'<span class="lb-val" style="color:'+col+'">'+fmt(a)+'</span></div>';
+        }).join('');
+        return '<div class="lb-rep"><div class="lb-head"><span class="lb-name">'+r.Name+'</span>'
+          +'<span class="lb-overall" style="color:'+scColor(ov)+'">'+fmt(ov)+' <span style="font-size:11px;color:var(--muted);font-weight:600">/5 overall</span></span></div>'
+          + rows + '</div>';
+      }).join('');
+}
+var curRep=null;
+function openRep(email){
+  curRep=DATA.roster.filter(function(r){return String(r.Email).toLowerCase()===String(email).toLowerCase();})[0];
+  var rep=curRep;
+  document.getElementById('rAvatar').textContent=initials(rep.Name);
+  document.getElementById('rAvatar').style.background=color(rep.Name);
+  document.getElementById('rName').textContent=rep.Name;
+  document.getElementById('rMeta').textContent=rep.Title+' · '+curMgr.name+' · '+roleLabel(rep.Role)+' sales process';
+  renderSteps();
+  document.getElementById('home').style.display='none';
+  document.getElementById('mgrView').style.display='none';
+  document.getElementById('repView').style.display='block';
+  window.scrollTo(0,0);
+}
+function renderSteps(){
+  var rep=curRep;
+  document.getElementById('stepBody').innerHTML = stepsFor(rep.Role).map(function(s){
+    var row=scoreRow(rep.Email, s.key)||{};
+    var my=num(row.My_Score), mg=num(row.Mgr_Score), a=avg2(my,mg);
+    return '<tr data-step="'+s.key+'">'
+      +'<td class="step" onclick="openCoaching(\''+s.key+'\')">'+s.label+'<span class="sub">'+s.sub+' <span class="chev">coaching ›</span></span></td>'
+      +'<td class="sc" style="color:'+scColor(my)+'">'+fmt(my)+'</td>'
+      +'<td><input class="mgr-in" type="number" min="1" max="5" step="0.5" value="'+(mg==null?'':mg)+'" onchange="onMgr(\''+s.key+'\',this)"></td>'
+      +'<td class="avg" style="color:'+scColor(a)+'">'+fmt(a)+'</td>'
+      +'</tr>';
+  }).join('');
+  var ov=repOverall(rep);
+  document.getElementById('rOverall').textContent=fmt(ov);
+  document.getElementById('rOverall').style.color=scColor(ov);
+}
+function onMgr(stepKey, inputEl){
+  var rep=curRep, val=inputEl.value;
+  var row=scoreRow(rep.Email, stepKey);
+  if(!row){ row={Email:rep.Email, Step_Key:stepKey, My_Score:'', Mgr_Score:''}; DATA.scores.push(row); }
+  row.Mgr_Score=val;
+  // update avg + overall live
+  var my=num(row.My_Score), mg=num(row.Mgr_Score), a=avg2(my,mg);
+  var tr=document.querySelector('#stepBody tr[data-step="'+stepKey+'"]');
+  tr.querySelector('.avg').textContent=fmt(a); tr.querySelector('.avg').style.color=scColor(a);
+  var ov=repOverall(rep); document.getElementById('rOverall').textContent=fmt(ov); document.getElementById('rOverall').style.color=scColor(ov);
+  // save
+  inputEl.classList.remove('saved'); inputEl.classList.add('saving');
+  fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body:JSON.stringify({action:'saveMgr', email:rep.Email, stepKey:stepKey, mgrScore:(val===''?'':parseFloat(val))})})
+    .then(function(r){return r.json();})
+    .then(function(d){ inputEl.classList.remove('saving'); if(d&&d.success){inputEl.classList.add('saved');} else {document.getElementById('note').textContent='Save failed: '+((d&&d.error)||'unknown');} })
+    .catch(function(){ inputEl.classList.remove('saving'); document.getElementById('note').textContent='Save failed (network).'; });
+}
+function openCoaching(stepKey){
+  var rep=curRep, s=stepsFor(rep.Role).filter(function(x){return x.key===stepKey;})[0];
+  var a=stepAvg(rep, stepKey);
+  var role = COACHING[rep.Role] ? rep.Role : 'AE';
+  var pts=((COACHING[role]||{})[stepKey]||{})[band(a)] || ['No coaching points for this step yet.'];
+  document.getElementById('mStep').innerHTML=s.label+'<span class="sub">'+s.sub+'</span>';
+  document.getElementById('mAvg').textContent=fmt(a);
+  document.getElementById('mAvg').style.color=scColor(a);
+  document.getElementById('mNotes').innerHTML=pts.slice(0,3).map(function(p,i){ return '<li><span class="num">'+(i+1)+'</span><span>'+p+'</span></li>'; }).join('');
+  document.getElementById('overlay').classList.add('show');
+}
+function closeModal(){ document.getElementById('overlay').classList.remove('show'); }
+
+document.getElementById('refreshBtn').addEventListener('click', loadData);
+document.getElementById('repBack').addEventListener('click', function(){ openMgr(curMgr.key); });
+document.querySelector('[data-home]').addEventListener('click', renderHome);
+document.getElementById('closeBtn').addEventListener('click', closeModal);
+document.getElementById('overlay').addEventListener('click', function(e){ if(e.target===this) closeModal(); });
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+
+loadData();
+</script>
+</body>
+</html>
